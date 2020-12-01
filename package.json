@@ -1,0 +1,42 @@
+{
+  "name": "klaxoon_noot_noot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/core/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -r esm src/core/index.js",
+    "start": "npm -r esm src/core/index.js",
+    "lint": "eslint ."
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BakaNate/klaxoon_noot_noot.git"
+  },
+  "author": "BakaNate",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BakaNate/klaxoon_noot_noot/issues"
+  },
+  "homepage": "https://github.com/BakaNate/klaxoon_noot_noot#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "ddos": "^0.2.1",
+    "eslint": "^6.7.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "mongoose": "^5.7.12",
+    "nodemon": "^2.0.1"
+  },
+  "devDependencies": {
+    "cross-env": "^6.0.3",
+    "pre-commit": "^1.2.2"
+  }
+}
