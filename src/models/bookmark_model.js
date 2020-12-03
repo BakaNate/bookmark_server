@@ -85,5 +85,4 @@ bookmarkSchema.methods.deleteDocument = async function () {
   return null;
 };
 
-const bookmarkModel = mongoose.model('Bookmark', bookmarkSchema);
-export default bookmarkModel;
+module.exports = mongoose.model('Bookmark', bookmarkSchema);
