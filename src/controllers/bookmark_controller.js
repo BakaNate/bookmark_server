@@ -1,5 +1,4 @@
 import {
-  throwBadRequest,
   sendOK, throwNotFound,
 } from '../BakaDevKit/BakaRes';
 
