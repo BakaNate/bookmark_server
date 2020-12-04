@@ -11,7 +11,11 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
 router.route('/')
   .get((req, res) => res.status(200).send('Wesh Morray'));
 
+router.route('/bookmark/')
+  .get(bookmarkController.getAllBookmark);
+
 router.route('/bookmark/:id')
+  .get(bookmarkController.getOneBookmark)
   .delete(bookmarkController.deleteBookmark);
 
 module.exports = router;
