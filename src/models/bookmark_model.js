@@ -40,7 +40,7 @@ const bookmarkSchema = new mongoose.Schema({
     type: String,
     maxlength: 254,
     required: true,
-  }
+  },
 });
 
 bookmarkSchema.statics.getAllDocuments = async function (cb) {
