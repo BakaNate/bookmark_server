@@ -14,6 +14,9 @@ router.route('/')
 router.route('/bookmark/')
   .get(bookmarkController.getAllBookmark);
 
+router.route('/bookmark/img/')
+  .post(bookmarkController.createImgBookmark);
+
 router.route('/bookmark/:id')
   .get(bookmarkController.getOneBookmark)
   .delete(bookmarkController.deleteBookmark);

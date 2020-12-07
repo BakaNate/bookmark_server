@@ -36,6 +36,11 @@ const bookmarkSchema = new mongoose.Schema({
     type: [String],
     maxlength: 254,
   },
+  type: {
+    type: String,
+    maxlength: 254,
+    required: true,
+  }
 });
 
 bookmarkSchema.statics.getAllDocuments = async function (cb) {
@@ -54,20 +59,21 @@ bookmarkSchema.statics.getDocumentById = async function (_id, cb) {
   });
 };
 
-bookmarkSchema.statics.createRecords = async function (url, title, author, date, height,
-  width, duration, tags, cb) {
-  if (!url || !title || !author || !date || !height || !width || !tags) {
+bookmarkSchema.statics.createRecords = async function (url, title, author, height,
+  width, duration, tags, type, cb) {
+  if (!url || !title || !author || !height || !width || !type) {
     return cb(new Error('Missing Parameters'));
   }
   await this.model('Bookmark').create({
     url,
     title,
     author,
-    date,
+    date: Date.now(),
     height,
     width,
     duration,
     tags,
+    type,
   }, (err, record) => {
     if (err) return cb(err);
     return cb(null, record);
