@@ -17,8 +17,12 @@ router.route('/bookmark/')
 router.route('/bookmark/img/')
   .post(bookmarkController.createImgBookmark);
 
+router.route('/bookmark/video/')
+  .post(bookmarkController.createVideoBookmark);
+
 router.route('/bookmark/:id')
   .get(bookmarkController.getOneBookmark)
+  .put(bookmarkController.updateTag)
   .delete(bookmarkController.deleteBookmark);
 
 module.exports = router;

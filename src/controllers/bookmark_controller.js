@@ -49,6 +49,42 @@ const createImgBookmark = async (req, res) => {
   return null;
 };
 
+const createVideoBookmark = async (req, res) => {
+  if (!req.body.url) return throwBadRequest(new Error('Missing parameter'), res);
+  const oembedUrl = `https://vimeo.com/api/oembed.json?url=${Utils.formatString(req.body.url)}`;
+
+  await axios.get(oembedUrl).then(async (r) => {
+    await Bookmark.createRecords(
+      req.body.url,
+      r.data.title,
+      r.data.author_name,
+      r.data.height,
+      r.data.width,
+      r.data.duration,
+      req.body.tags,
+      r.data.type,
+      (err, record) => {
+        if (err) return throwIntServerError(err, res);
+        return sendCreated(record, res);
+      },
+    );
+  }).catch((e) => throwIntServerError(e, res));
+  return null;
+};
+
+const updateTag = async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return throwBadRequest(new Error('Wrong id format'), res);
+  }
+  if (!req.body.tags) return throwBadRequest(new Error('Missing parameters'), res);
+  await Bookmark.getDocumentById(req.params.id, (err, bookmark) => {
+    if (err) return throwNotFound(err, res);
+    bookmark.updateTags(req.body.tags);
+    return sendOK(res);
+  });
+  return null;
+};
+
 const deleteBookmark = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return throwBadRequest(new Error('Wrong id format'), res);
@@ -64,6 +100,8 @@ const deleteBookmark = async (req, res) => {
 module.exports = {
   getAllBookmark,
   createImgBookmark,
+  createVideoBookmark,
+  updateTag,
   getOneBookmark,
   deleteBookmark,
 };
