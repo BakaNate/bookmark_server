@@ -11,7 +11,7 @@ const Bookmark = require('../models/bookmark_model');
 const getAllBookmark = async (req, res) => {
   await Bookmark.getAllDocuments((err, bookmarks) => {
     if (err) return throwNotFound(err, res);
-    return sendOKWithData(bookmarks, res);
+    return sendOKWithData({ bookmarks }, res);
   });
 };
 
@@ -21,7 +21,7 @@ const getOneBookmark = async (req, res) => {
   }
   await Bookmark.getDocumentById(req.params.id, (err, bookmark) => {
     if (err) return throwNotFound(err, res);
-    return sendOKWithData(bookmark);
+    return sendOKWithData({ bookmark });
   });
   return null;
 };
@@ -42,7 +42,7 @@ const createImgBookmark = async (req, res) => {
       r.data.type,
       (err, record) => {
         if (err) return throwIntServerError(err, res);
-        return sendCreated(record, res);
+        return sendCreated({ bookmark: record }, res);
       },
     );
   }).catch((e) => throwIntServerError(e, res));
@@ -65,7 +65,7 @@ const createVideoBookmark = async (req, res) => {
       r.data.type,
       (err, record) => {
         if (err) return throwIntServerError(err, res);
-        return sendCreated(record, res);
+        return sendCreated({ bookmark: record }, res);
       },
     );
   }).catch((e) => throwIntServerError(e, res));
