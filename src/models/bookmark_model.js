@@ -18,8 +18,9 @@ const bookmarkSchema = new mongoose.Schema({
     maxlength: 254,
   },
   date: {
-    type: Date,
+    type: String,
     required: true,
+    maxlength: 254,
   },
   height: {
     type: Number,
@@ -64,11 +65,12 @@ bookmarkSchema.statics.createRecords = async function (url, title, author, heigh
   if (!url || !title || !author || !height || !width || !type) {
     return cb(new Error('Missing Parameters'));
   }
+  const today = new Date();
   await this.model('Bookmark').create({
     url,
     title,
     author,
-    date: Date.now(),
+    date: `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`,
     height,
     width,
     duration,
