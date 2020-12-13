@@ -21,7 +21,7 @@ const getOneBookmark = async (req, res) => {
   }
   await Bookmark.getDocumentById(req.params.id, (err, bookmark) => {
     if (err) return throwNotFound(err, res);
-    return sendOKWithData({ bookmark });
+    return sendOKWithData({ bookmark }, res);
   });
   return null;
 };
