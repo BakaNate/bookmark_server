@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon -r esm src/core/index.js",
-    "start": "npm -r esm src/core/index.js",
+    "start": "node -r esm src/core/index.js",
     "lint": "eslint ."
   },
   "pre-commit": [
